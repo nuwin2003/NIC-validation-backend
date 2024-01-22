@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -29,5 +30,11 @@ public class FileController {
     public ResponseEntity<List<File>> getAllRecords(){
         List<File> records = fileService.getAllRecords();
         return new ResponseEntity<>(records, HttpStatus.OK);
+    }
+
+    @GetMapping("/{nicNumber}")
+    public ResponseEntity<Optional<File>> getSearchDetails(@PathVariable String nicNumber){
+        Optional<File> record = fileService.getSearchDetails(nicNumber);
+        return new ResponseEntity<>(record, HttpStatus.OK);
     }
 }

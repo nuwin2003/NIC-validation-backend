@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -72,6 +73,11 @@ public class FileServiceImpl implements FileService {
     @Override
     public List<File> getAllRecords() {
         return fileRepository.findAll();
+    }
+
+    @Override
+    public Optional<File> getSearchDetails(String nicNumber) {
+        return fileRepository.findById(nicNumber);
     }
 
     @Override
