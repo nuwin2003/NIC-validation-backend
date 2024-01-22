@@ -1,6 +1,7 @@
 package org.example.service;
 
 import com.opencsv.exceptions.CsvValidationException;
+import org.example.model.File;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,4 +14,5 @@ public interface FileService {
     List<String[]> validateFile(List<String[]> records);
 
     boolean isValidNic(String nic);
+    File calculateData(String nic);
 }

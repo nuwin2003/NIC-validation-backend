@@ -2,6 +2,7 @@ package org.example.service.impl;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import org.example.model.File;
 import org.example.repository.FileRepository;
 import org.example.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,35 +38,51 @@ public class FileServiceImpl implements FileService {
     @Override
     public List<String[]> validateFile(List<String[]> records) {
         for (String[] nicArray : records) {
-            System.out.println("Is valid: " + isValidNic(nicArray[0]));
+            if(isValidNic(nicArray[0])){
+                File file = calculateData(nicArray[0]);
+                fileRepository.saveNic(file);
+            }
         }
         return records;
     }
 
     @Override
+    public File calculateData(String nic) {
+        //Calculations
+        String birthYearStr = nic.substring(0, 4);
+        int birthdayAndGenderInt =Integer.parseInt(nic.substring(4, 7));
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        String gender;
+
+        if(birthdayAndGenderInt > 500){
+            gender = "Female";
+        }else{
+            gender = "Male";
+        }
+        int birthYear =Integer.parseInt(birthYearStr);
+        int ageCalculate = currentYear - birthYear;
+        int age = Math.max(ageCalculate, 0);
+
+        LocalDate localDate = LocalDate.of(birthYear, 1, 1);
+        LocalDate birthday = localDate.plusDays(birthdayAndGenderInt);
+
+        return new File(nic, birthday.toString(), age, gender);
+    }
+
+    @Override
     public boolean isValidNic(String nic) {
+        //Validations
+        boolean isValid = true;
         if(nic.length() == 12){
             String birthYearStr = nic.substring(0, 4);
-            int birthdayAndGenderInt =Integer.parseInt(nic.substring(4, 7));
-            String gender;
-
-            if(birthdayAndGenderInt > 500){
-                gender = "Female";
-            }else{
-                gender = "Male";
-            }
-
-            int birthYear =Integer.parseInt(birthYearStr);
             int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-            int age = currentYear - birthYear;
 
-            LocalDate localDate = LocalDate.of(birthYear, 1, 1);
-            LocalDate birthday =localDate.plusDays(birthdayAndGenderInt);
-
-            System.out.println("Birthday : "+birthday);
-            System.out.println("Gender : "+gender);
-            System.out.println("Age : "+age);
+            if(Integer.parseInt(birthYearStr) > currentYear){
+                isValid = false;
+            }
+        }else{
+            isValid = false;
         }
-        return true;
+        return isValid;
     }
 }

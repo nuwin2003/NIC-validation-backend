@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 public class File {
 
     @Id
-    private Long nicNumber;
+    private String nicNumber;
     private String birthday;
-    private Long age;
+    private int age;
     private String gender;
 }
