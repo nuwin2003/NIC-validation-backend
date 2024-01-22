@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface FileService {
     List<String[]> uploadFile(MultipartFile file) throws IOException, CsvValidationException;
-
     List<String[]> validateFile(List<String[]> records);
-
     boolean isValidNic(String nic);
     File calculateData(String nic);
+    List<File> getAllRecords();
+
 }

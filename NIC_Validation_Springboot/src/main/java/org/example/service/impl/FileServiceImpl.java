@@ -40,7 +40,7 @@ public class FileServiceImpl implements FileService {
         for (String[] nicArray : records) {
             if(isValidNic(nicArray[0])){
                 File file = calculateData(nicArray[0]);
-                fileRepository.saveNic(file);
+                fileRepository.save(file);
             }
         }
         return records;
@@ -67,6 +67,11 @@ public class FileServiceImpl implements FileService {
         LocalDate birthday = localDate.plusDays(birthdayAndGenderInt);
 
         return new File(nic, birthday.toString(), age, gender);
+    }
+
+    @Override
+    public List<File> getAllRecords() {
+        return fileRepository.findAll();
     }
 
     @Override
