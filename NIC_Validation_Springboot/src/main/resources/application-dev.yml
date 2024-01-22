@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/NIC_Validation
+    username: root
+    password: nuwin47212
+  jpa:
+    hibernate:
+      ddl-auto: create
