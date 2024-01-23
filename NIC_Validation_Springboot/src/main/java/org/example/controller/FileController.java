@@ -37,4 +37,14 @@ public class FileController {
         Optional<File> record = fileService.getSearchDetails(nicNumber);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
+
+    @GetMapping("/male-count")
+    public Long getMaleCount(){
+        return fileService.getMaleCount();
+    }
+
+    @GetMapping("/female-count")
+    public Long getFemaleCount(){
+        return fileService.getFemaleCount();
+    }
 }

@@ -81,6 +81,16 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public Long getMaleCount() {
+        return fileRepository.countMales();
+    }
+
+    @Override
+    public Long getFemaleCount() {
+        return fileRepository.countFemales();
+    }
+
+    @Override
     public boolean isValidNic(String nic) {
         //Validations
         boolean isValid = true;

@@ -16,5 +16,6 @@ public interface FileService {
     File calculateData(String nic);
     List<File> getAllRecords();
     Optional<File> getSearchDetails(String nicNumber);
-
+    Long getMaleCount();
+    Long getFemaleCount();
 }
