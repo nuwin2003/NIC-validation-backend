@@ -190,6 +190,11 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public Long getRecordCount() {
+        return fileRepository.findNumberOfRecords();
+    }
+
+    @Override
     public boolean isValidNic(String nic) {
         //Validations
         boolean isValid = true;

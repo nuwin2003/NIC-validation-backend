@@ -22,4 +22,5 @@ public interface FileService {
     Long getFemaleCount();
     MaleBirthMonths getMaleBirthMonths();
     FemaleBirthMonths getFemaleBirthMonths();
+    Long getRecordCount();
 }

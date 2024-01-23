@@ -59,4 +59,9 @@ public class FileController {
     public FemaleBirthMonths getFemaleBirthMonths(){
         return fileService.getFemaleBirthMonths();
     }
+
+    @GetMapping("/record-count")
+    public Long getRecordCount(){
+        return fileService.getRecordCount();
+    }
 }

@@ -19,4 +19,7 @@ public interface FileRepository extends JpaRepository<File, String> {
 
     @Query("SELECT birthday FROM File WHERE gender = 'Female'")
     List<String> findFemaleBirthdays();
+
+    @Query("SELECT COUNT(*) FROM File")
+    Long findNumberOfRecords();
 }
