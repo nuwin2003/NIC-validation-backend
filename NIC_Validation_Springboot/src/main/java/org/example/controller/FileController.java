@@ -1,7 +1,9 @@
 package org.example.controller;
 
 import com.opencsv.exceptions.CsvValidationException;
+import org.example.model.FemaleBirthMonths;
 import org.example.model.File;
+import org.example.model.MaleBirthMonths;
 import org.example.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,5 +48,15 @@ public class FileController {
     @GetMapping("/female-count")
     public Long getFemaleCount(){
         return fileService.getFemaleCount();
+    }
+
+    @GetMapping("/male-birth-months")
+    public MaleBirthMonths getMaleBirthMonths(){
+        return fileService.getMaleBirthMonths();
+    }
+
+    @GetMapping("/female-birth-months")
+    public FemaleBirthMonths getFemaleBirthMonths(){
+        return fileService.getFemaleBirthMonths();
     }
 }
